@@ -27,8 +27,7 @@ SELECT * FROM layoffs_staging;
 
 -- Query to find:
 
-SELECT 
-	*, 
+SELECT *, 
 	ROW_NUMBER() OVER(
 		PARTITION BY company, location, industry, 
 		total_laid_off, percentage_laid_off, `date`, 
@@ -37,8 +36,7 @@ FROM layoffs_staging;
     
 WITH duplicate_cte AS 
 (
-SELECT 
-	*, 
+SELECT *, 
 	ROW_NUMBER() OVER(
 		PARTITION BY company, location, industry, 
 		total_laid_off, percentage_laid_off, `date`, 
@@ -55,10 +53,10 @@ WHERE row_num > 1;
 
 WITH duplicate_cte AS (
 SELECT *, 
-ROW_NUMBER() OVER(
-PARTITION BY company, location, industry, 
-			total_laid_off, percentage_laid_off, `date`, 
-            stage, country, funds_raised_millions) AS row_num
+	ROW_NUMBER() OVER(
+	PARTITION BY company, location, industry, 
+		total_laid_off, percentage_laid_off, `date`, 
+        	stage, country, funds_raised_millions) AS row_num
 FROM layoffs_staging
 )
 DELETE
@@ -89,10 +87,10 @@ FROM layoffs_staging2;
 
 INSERT INTO layoffs_staging2
 SELECT *, 
-ROW_NUMBER() OVER(
-PARTITION BY company, location, industry, 
-			total_laid_off, percentage_laid_off, `date`, 
-            stage, country, funds_raised_millions) AS row_num
+	ROW_NUMBER() OVER(
+	PARTITION BY company, location, industry, 
+		total_laid_off, percentage_laid_off, `date`, 
+        	stage, country, funds_raised_millions) AS row_num
 FROM layoffs_staging;
 
 SELECT *
