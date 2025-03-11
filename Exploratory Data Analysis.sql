@@ -99,7 +99,7 @@ LIMIT 10;
 /** Note: Stages represent a company's growth and funding journey,
 		from early investment (Series B) to scaling (Series C-F),
 		late-stage expansion (Series H, Private Equity), 
-        going public (Post-IPO), or being Acquired;
+        	going public (Post-IPO), or being Acquired;
 **/
 
 
@@ -120,9 +120,9 @@ FROM Company_Year
 )
 SELECT
 	company,
-    years,
-    total_laid_off_sum,
-    ranking
+	years,
+	total_laid_off_sum,
+	ranking
 FROM 
 	Company_Year_Rank
 WHERE ranking <= 3 
@@ -153,7 +153,7 @@ GROUP BY month_dates
 SELECT 
 	month_dates,
 	total_per_month, 
-    SUM(total_per_month) OVER(ORDER BY month_dates) as rolling_total
+	SUM(total_per_month) OVER(ORDER BY month_dates) as rolling_total
 FROM monthly_total
 ORDER BY month_dates ASC;
 
